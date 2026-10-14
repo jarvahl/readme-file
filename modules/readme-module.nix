@@ -10,6 +10,8 @@ let
   trimTrailingNewlines =
     text: if lib.hasSuffix "\n" text then trimTrailingNewlines (lib.removeSuffix "\n" text) else text;
 
+  generatedNotice = "<!-- DO-NOT-EDIT. This file was auto-generated using github:jarvahl/readme-file. Use nix run .#write-files to regenerate it. -->";
+
   renderSection =
     section:
     lib.concatStringsSep "\n\n" (
@@ -18,7 +20,10 @@ let
 
   render =
     lib.concatStringsSep "\n\n" (
-      [ "# ${cfg.title}" ]
+      [
+        generatedNotice
+        "# ${cfg.title}"
+      ]
       ++ lib.optional (cfg.description != "") (trimTrailingNewlines cfg.description)
       ++ map renderSection cfg.sections
     )
