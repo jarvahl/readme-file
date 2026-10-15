@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  options.readmeFile = {
+  options.readme-file = {
     title = lib.mkOption {
       type = lib.types.str;
       default = "";

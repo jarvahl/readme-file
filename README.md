@@ -16,7 +16,7 @@ Add the flake module to a flake-parts configuration:
     inputs.flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [ inputs.readme-file.flakeModules.default ];
 
-      readmeFile = {
+      readme-file = {
         title = "My Nix Configuration";
         description = "Declarative NixOS configuration";
         sections = [
@@ -48,7 +48,7 @@ module operations:
 ```nix
 { lib, ... }:
 {
-  readmeFile.sections = lib.mkBefore [
+  readme-file.sections = lib.mkBefore [
     {
       title = "Quick Start";
       text = "Getting started.";

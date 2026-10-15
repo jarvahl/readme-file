@@ -19,7 +19,7 @@
     inputs:
     inputs.flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [ (inputs.import-tree ./modules) ];
-      readmeFile = {
+      readme-file = {
         title = "readme-file";
         description = "Declarative README generation for Nix flakes.";
         sections = [
@@ -36,7 +36,7 @@
                   inputs.flake-parts.lib.mkFlake { inherit inputs; } {
                     imports = [ inputs.readme-file.flakeModules.default ];
 
-                    readmeFile = {
+                    readme-file = {
                       title = "My Nix Configuration";
                       description = "Declarative NixOS configuration";
                       sections = [
@@ -68,7 +68,7 @@
               ```nix
               { lib, ... }:
               {
-                readmeFile.sections = lib.mkBefore [
+                readme-file.sections = lib.mkBefore [
                   {
                     title = "Quick Start";
                     text = "Getting started.";

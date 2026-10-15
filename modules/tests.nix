@@ -9,7 +9,7 @@ let
 
   basic = eval [
     {
-      readmeFile = {
+      readme-file = {
         title = "Project";
         description = "Intro";
         sections = [
@@ -28,7 +28,7 @@ let
 
   ordered = eval [
     ({ lib, ... }: {
-      readmeFile.sections = lib.mkAfter [
+      readme-file.sections = lib.mkAfter [
         {
           title = "After";
           text = "a";
@@ -36,7 +36,7 @@ let
       ];
     })
     ({ lib, ... }: {
-      readmeFile.sections = lib.mkBefore [
+      readme-file.sections = lib.mkBefore [
         {
           title = "Before";
           text = "b";
@@ -44,7 +44,7 @@ let
       ];
     })
     ({ lib, ... }: {
-      readmeFile.sections = lib.mkOrder 500 [
+      readme-file.sections = lib.mkOrder 500 [
         {
           title = "Middle";
           text = "m";
@@ -55,8 +55,8 @@ let
 
   composed = eval [
     ({ lib, ... }: {
-      readmeFile.description = lib.mkDefault "default";
-      readmeFile.sections = lib.mkMerge [
+      readme-file.description = lib.mkDefault "default";
+      readme-file.sections = lib.mkMerge [
         [
           {
             title = "Merged";
@@ -72,7 +72,7 @@ let
       ];
     })
     ({ lib, ... }: {
-      readmeFile.description = lib.mkForce "forced";
+      readme-file.description = lib.mkForce "forced";
     })
   ];
 
@@ -87,7 +87,7 @@ let
           "build"
           "test"
         ];
-        readmeFile.sections = [
+        readme-file.sections = [
           {
             title = "Commands";
             text = inputs.nixpkgs.lib.concatMapStringsSep "\n" (name: "- `${name}`") config.commands;
@@ -98,10 +98,10 @@ let
   ];
 
   assertions = [
-    (basic.readmeFile.title == "Project")
-    (basic.readmeFile.description == "Intro")
+    (basic.readme-file.title == "Project")
+    (basic.readme-file.description == "Intro")
     (
-      basic.readmeFile.sections == [
+      basic.readme-file.sections == [
         {
           title = "One";
           text = "Line 1\nLine 2";
@@ -113,7 +113,7 @@ let
       ]
     )
     (
-      ordered.readmeFile.sections == [
+      ordered.readme-file.sections == [
         {
           title = "Middle";
           text = "m";
@@ -128,10 +128,10 @@ let
         }
       ]
     )
-    ((builtins.elemAt dynamic.readmeFile.sections 0).text == "- `build`\n- `test`")
-    (composed.readmeFile.description == "forced")
+    ((builtins.elemAt dynamic.readme-file.sections 0).text == "- `build`\n- `test`")
+    (composed.readme-file.description == "forced")
     (
-      composed.readmeFile.sections == [
+      composed.readme-file.sections == [
         {
           title = "Merged";
           text = "merged";
