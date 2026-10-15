@@ -5,7 +5,7 @@
   ...
 }:
 let
-  cfg = config.readme;
+  cfg = config.readmeFile;
 
   trimTrailingNewlines =
     text: if lib.hasSuffix "\n" text then trimTrailingNewlines (lib.removeSuffix "\n" text) else text;
